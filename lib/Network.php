@@ -11,12 +11,11 @@ class Network
 	{
 		$host_list = array();
 
-		$host_file_list = glob(sprintf('%s/var/network/*.json', APP_ROOT));
+		$host_file_list = glob(sprintf('%s/var/network/*/peer.json', APP_ROOT));
 		foreach ($host_file_list as $host_file) {
-			$host = basename($host_file, '.json');
-			$host_list[] = array(
-				'peer' => $host,
-			);
+			$path = dirname($host_file);
+			$host = basename($path); // , '.json');
+			$host_list[] = $host;
 		}
 
 		return $host_list;
@@ -25,7 +24,9 @@ class Network
 
 	public static function loadPeer($p)
 	{
-		$host_file = sprintf('%s/var/network/%s.json', APP_ROOT, $p);
+		$p = basename($p);
+
+		$host_file = sprintf('%s/var/network/%s/peer.json', APP_ROOT, $p);
 		if (!is_file($host_file)) {
 			throw new Exception('ALN#028: Peer Not Found');
 			return null;

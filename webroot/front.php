@@ -56,6 +56,12 @@ $app->group('/license/{license}', function() {
 //->add('Middleware_Custom_Magic')
 ;
 
+//$app->get('/search', 'Example_Search');
+$app->get('/search', 'Search')
+	//->add('Middleware_Verify_HMAC')
+	//->add('Middleware_Verify_Self')
+	;
+
 /**
 	These are various ideas of Middleware that could(should?) be added
 */
