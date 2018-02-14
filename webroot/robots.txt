@@ -1,0 +1,7 @@
+#
+# Hello Robots
+#
+
+User-Agent: *
+Disallow: /
+
