@@ -23,6 +23,11 @@ spl_autoload_register(function($c) {
 }, true, false);
 
 // Composer Stuff
-require_once(APP_ROOT . '/vendor/autoload.php');
+$fva = APP_ROOT . '/vendor/autoload.php';
+if (!is_file($fva)) {
+	echo "You must run composer first\n");
+	exit(1);
+}
+require_once($fva);
 
 // You may want to tweak stuff here to bootstrap your own environment.
