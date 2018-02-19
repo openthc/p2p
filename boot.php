@@ -25,7 +25,7 @@ spl_autoload_register(function($c) {
 // Composer Stuff
 $fva = APP_ROOT . '/vendor/autoload.php';
 if (!is_file($fva)) {
-	echo "You must run composer first\n");
+	echo "You must run composer first\n";
 	exit(1);
 }
 require_once($fva);

@@ -2,6 +2,7 @@
 
 These instructions are for Debian 9 and assume that operating the p2p node is the **ONLY** task for this system.
 
+
 ## Requirements
 
 	apt-get -qqy update
@@ -13,6 +14,9 @@ These instructions are for Debian 9 and assume that operating the p2p node is th
 	# You may want:
 	apt-get -qqy install php-geoip php-mysql php-pgsql php-redis php-ssh2 php-xdebug
 
+This application, or at least parts of it, depend on Keybase, see https://keybase.io/docs/the_app/install_linux for details.
+
+
 ## Installation
 
 	mkdir /opt/p2p.YOURHOST.TLD && cd /opt/p2p.YOURHOST.TLD
@@ -20,6 +24,7 @@ These instructions are for Debian 9 and assume that operating the p2p node is th
 	composer update
 
 You may need to install composer (https://getcomposer.org/)
+
 
 ## Configuration
 
@@ -32,6 +37,7 @@ You may need to adjust this configuration as necessary (or for a different web-s
 	/etc/init.d/apache2 restart
 
 You will need to update the SSL configuration, either by placing your certificates in the default locations or by updating the web-server configuration.
+
 
 ## Checking
 

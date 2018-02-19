@@ -14,7 +14,7 @@ It should be quite simple, PHP is like, everywhere man.
 	cp ./etc/apache2.conf /etc/apache2/apache2.conf
 
 More information is in the INSTALL.md file.
-	
+
 ## Peering
 
 You, can peer https://p2p.openthc.org/ or directly with any known peer.
@@ -28,20 +28,13 @@ From that connection, you can discover the wider network.
 ## Establishing Trust
 
 Exchange your secret key with a Peer you wish to trust, this can be done out of band, we recommend using Keybase.
-Once the secret is shared you must sign all your requests.
+Once the secret is shared a Peer will use it to sign requests.
 
 ## Signing Requests
 
 Simply use your hashed key with a hash of a canonical request.
-
-	HASH=hash_hmac('sha256', $data, $secret);
-
-	GET /license/M123456/product/987654A
-	date: $DATE
-	host: $HOST
-	x-openthc-peer: 
-
 You have now joined this peer, and all requests to this peer must be signed with your $SECRET as an HMAC.
+See (./doc/Signing.md).
 
 ## Requesting Information
 
