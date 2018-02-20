@@ -31,36 +31,38 @@ $app->group('/network', function() {
 });
 
 
-// Query License Info
-$app->group('/license/{license}', function() {
-
-	// Maybe Add Middleware Here?
-	// $this->add('Middleware_Filter_Something');
+// Lookup Specific Datas
+$app->group('/object', function() {
 
 	// Set to this to disable that interface
-	//$this->get('/lot/{guid}', 'Disable_Disable');
+	//$this->get('/lot/{license}/{guid}', 'Disable_Disable');
 
 	// Share Lot Details
-	//$this->get('/lot/{guid}', 'Example_Lot');
+	//$this->get('/lot/{license}/{guid}', 'Example_Lot');
 
 	// Share Product data
-	//$this->get('/product/{guid}', 'Example_Product');
+	//$this->get('/product/{license}/{guid}', 'Example_Product');
 
 	// Share QA data
-	//$this->get('/qa/{guid}', 'Example_QA');
+	//$this->get('/qa/{license}/{guid}', 'Example_QA');
 
 	// Share Strain data
-	//$this->get('/strain/{guid}', 'Example_Strain');
+	//$this->get('/strain/{license}/{guid}', 'Example_Strain');
 
 })
+->add('Middleware_Verify_Secret')
 //->add('Middleware_Custom_Magic')
 ;
 
+
+// Trusted Host query /Search to search the network
 //$app->get('/search', 'Example_Search');
 $app->get('/search', 'Search')
-	//->add('Middleware_Verify_HMAC')
-	//->add('Middleware_Verify_Self')
+//	->add('Middleware_Verify_HMAC')
+//	->add('Middleware_Verify_Self')
+//	->add('Middleware_Verify_DNS');
 	;
+
 
 /**
 	These are various ideas of Middleware that could(should?) be added
@@ -74,6 +76,11 @@ $app->get('/search', 'Search')
 
 $app->run();
 
+exit(0);
+
+/**
+	Slim Loading Routine
+*/
 function _new_slim_app()
 {
 	// Create App Container

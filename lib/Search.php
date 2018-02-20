@@ -22,7 +22,7 @@ class Search
 	/**
 		Execute the Search in Serial
 	*/
-	function _search_serial($lic_code, $obj_type, $obj_guid)
+	function _search_serial($obj_type, $lic_code, $obj_guid)
 	{
 		$ret_list = array();
 
@@ -32,7 +32,7 @@ class Search
 
 			$peer_info = Network::loadPeer($peer);
 
-			$url = sprintf('https://%s/license/%s/%s/%s', $peer_info['peer'], $lic_code, $obj_type, $obj_guid);
+			$url = sprintf('https://%s/object/%s/%s/%s', $peer_info['peer'], $obj_type, $lic_code, $obj_guid);
 			//echo "Ping: $url\n";
 			$ch = $this->_curl_init($url);
 			//$add = curl_multi_add_handle($cmx, $req_list[ $peer ]);
@@ -40,7 +40,7 @@ class Search
 			$res = curl_exec($ch);
 			$inf = curl_getinfo($ch);
 			if (200 == $inf['http_code']) {
-				$ret_list[] = $res;
+				$ret_list[] = json_decode($res, true);
 			}
 		}
 
@@ -51,7 +51,7 @@ class Search
 	/**
 		Execute the search in parallel
 	*/
-	function _search_parallel($lic_code, $obj_type, $obj_guid)
+	function _search_parallel($obj_type, $lic_code, $obj_guid)
 	{
 
 		$ret_list = array();
@@ -64,7 +64,8 @@ class Search
 
 			$peer_info = Network::loadPeer($peer);
 
-			$url = sprintf('https://%s/license/%s/%s/%s', $peer_info['peer'], $lic_code, $obj_type, $obj_guid);
+			$url = sprintf('https://%s/object/%s/%s/%s', $peer_info['peer'], $obj_type, $lic_code, $obj_guid);
+
 			// echo "url=$url\n";
 			$req_list[ $peer ] = $this->_curl_init($url);
 			$add = curl_multi_add_handle($cmx, $req_list[ $peer ]);
@@ -93,7 +94,7 @@ class Search
 
 			if (200 == $inf['http_code']) {
 				$res = curl_multi_getcontent($ch);
-				$ret_list[] = $res;
+				$ret_list[] = json_decode($res, true);
 			}
 
 			curl_multi_remove_handle($cmx, $ch);
