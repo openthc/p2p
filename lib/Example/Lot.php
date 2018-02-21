@@ -10,7 +10,7 @@
 
 */
 
-class Example_Product
+class Example_Lot
 {
 	function __invoke($REQ, $RES, $ARG) {
 
@@ -32,7 +32,7 @@ class Example_Product
 					'unit' => 'g',
 				),
 			)
-		));
+		), 200, JSON_PRETTY_PRINT);
 	}
 
 	function returnLiquidEdible()

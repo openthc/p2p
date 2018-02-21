@@ -10,7 +10,7 @@
 
 */
 
-class License_Product_Example
+class Example_QA
 {
 	function __invoke($REQ, $RES, $ARG) {
 
