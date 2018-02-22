@@ -2,6 +2,7 @@
 /**
 	Respond to Network Ping
 */
+namespace App\lib\Network;
 
 class Network_Ping
 {
