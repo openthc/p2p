@@ -2,6 +2,7 @@
 /**
 	Search All Peers
 */
+namespace App\lib;
 
 class Search
 {
