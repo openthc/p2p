@@ -3,6 +3,7 @@
 /**
 	Command Line Bootstrapper
 */
+namespace App\bin;
 
 require_once(dirname(dirname(__FILE__)) . '/boot.php');
 
