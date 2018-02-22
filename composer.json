@@ -1,18 +1,23 @@
 {
-	"name":"openthc/p2p",
-	"description":"OpenTHC P2P",
-	"license":"MIT",
-	"require": {
-		"php": ">=7.0.0",
-		"ext-curl": "*",
-		"ext-date": "*",
-		"ext-json": "*",
-		"ext-mcrypt": "*",
-		"ext-PDO": "*",
-		"ext-session": "*",
-		"ext-sockets": "*",
-		"slim/slim": "3.9.2"
-	},
-	"require-dev": {
-	}
+  "name": "openthc/p2p",
+  "description": "OpenTHC P2P",
+  "license": "MIT",
+  "autoload": {
+    "psr-4": {
+      "App\\": "."
+    }
+  },
+  "require": {
+    "php": ">=7.0.0",
+    "ext-curl": "*",
+    "ext-date": "*",
+    "ext-json": "*",
+    "ext-mcrypt": "*",
+    "ext-PDO": "*",
+    "ext-session": "*",
+    "ext-sockets": "*",
+    "slim/slim": "3.9.2"
+  },
+  "require-dev": {
+  }
 }
