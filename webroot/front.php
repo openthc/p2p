@@ -2,6 +2,11 @@
 /**
 	Front Controller for OpenTHC P2P
 */
+namespace App\webroot;
+
+use Slim\App;
+use Slim\Container;
+use PDO;
 
 require_once(dirname(dirname(__FILE__)) . '/boot.php');
 
@@ -84,7 +89,7 @@ exit(0);
 function _new_slim_app()
 {
 	// Create App Container
-	$con = new \Slim\Container(array(
+	$con = new Container(array(
 		'debug' => false,
 		'settings' => array(
 			'addContentLengthHeader' => false,
@@ -167,7 +172,7 @@ function _new_slim_app()
 	};
 
 	// Create App
-	$app = new \Slim\App($con);
+	$app = new App($con);
 
 	return $app;
 
