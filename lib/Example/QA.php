@@ -9,6 +9,7 @@
 	Naturally, this is a dummy implementation
 
 */
+namespace App\lib\Example;
 
 class Example_QA
 {
