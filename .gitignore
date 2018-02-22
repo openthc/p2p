@@ -5,3 +5,4 @@ etc/ssl
 node_modules/
 var/
 vendor/
+.idea/
