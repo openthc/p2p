@@ -47,7 +47,7 @@ class Middleware_Verify_Secret
 	*/
 	private function _find_peer_by_secret($secret)
 	{
-		$file_glob = sprintf('%s/var/network/*/secret', APP_ROOT);
+		$file_glob = sprintf('%s/var/network/*/secret.key', APP_ROOT);
 		$file_list = glob($file_glob);
 		foreach ($file_list as $file) {
 			$chk = file_get_contents($file);

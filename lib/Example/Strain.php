@@ -10,44 +10,27 @@
 
 */
 
-class Example_Strain
+class Example_Strain extends Example_Base
 {
-	function __invoke($REQ, $RES, $ARG) {
+	function __invoke($REQ, $RES, $ARG)
+	{
 
 		$license = $ARG['license'];
-		$product = $ARG['product'];
+		$guid = $ARG['guid'];
 
-		// Connect to your DB
-		// $dbc = new PDO();
-
-		// Query your DB
-		
-
-		// Return 0
-		return $RES->withJSON(array(
-			'status' => 'failure',
-			'result' => null,
-		), 404);
-
-		// Return 1
-		$prod[] = array(
-			'ocpc' => '1234ABCE',
-			'base' => 'GobStopper',
-			'name' => 'GobStopper 7g',
-			'strain' => array(
-				'name' => 'Free Text',
-			),
-			'package' => array(
-				'type' => 'each',
-				'size' => 7,
-				'unit' => 'g',
-			),
-		);
+		$x = $this->_check_license_and_guid($RES, $license, $guid);
+		if (!empty($x)) {
+			return $x;
+		}
 
 		return $RES->withJSON(array(
 			'status' => 'success',
-			'result' => $prod
-		));
+			'result' => array(
+				'opk' => '1000',
+				'guid' => $guid,
+				'name' => 'Example Strain Name',
+			),
+		), 200, JSON_PRETTY_PRINT);
 
 	}
 }

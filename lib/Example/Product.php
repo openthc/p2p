@@ -10,13 +10,18 @@
 
 */
 
-class Example_Product
+class Example_Product extends Example_Base
 {
 	function __invoke($REQ, $RES, $ARG)
 	{
 
 		$license = $ARG['license'];
-		$product = $ARG['product'];
+		$guid = $ARG['guid'];
+
+		$x = $this->_check_license_and_guid($RES, $license, $guid);
+		if (!empty($x)) {
+			return $x;
+		}
 
 		// Return a Plant
 		$prod[] = array(

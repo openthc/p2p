@@ -10,12 +10,17 @@
 
 */
 
-class Example_Lot
+class Example_Lot extends Example_Base
 {
 	function __invoke($REQ, $RES, $ARG) {
 
 		$license = $ARG['license'];
 		$guid = $ARG['guid'];
+
+		$x = $this->_check_license_and_guid($RES, $license, $guid);
+		if (!empty($x)) {
+			return $x;
+		}
 
 		return $RES->withJSON(array(
 			'status' => 'success',

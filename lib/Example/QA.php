@@ -10,44 +10,32 @@
 
 */
 
-class Example_QA
+class Example_QA extends Example_Base
 {
-	function __invoke($REQ, $RES, $ARG) {
+	function __invoke($REQ, $RES, $ARG)
+	{
 
 		$license = $ARG['license'];
-		$product = $ARG['product'];
+		$guid = $ARG['guid'];
 
-		// Connect to your DB
-		// $dbc = new PDO();
+		$x = $this->_check_license_and_guid($RES, $license, $guid);
+		if (!empty($x)) {
+			return $x;
+		}
 
-		// Query your DB
-
-
-		// Return 0
-		return $RES->withJSON(array(
-			'status' => 'failure',
-			'result' => null,
-		), 404);
-
-		// Return 1
-		$prod[] = array(
-			'ocpc' => '1234ABCE',
-			'base' => 'GobStopper',
-			'name' => 'GobStopper 7g',
-			'strain' => array(
-				'name' => 'Free Text',
-			),
-			'package' => array(
-				'type' => 'each',
-				'size' => 7,
-				'unit' => 'g',
-			),
-		);
+		$res = array();
+		$res['status'] = 'pass|fail|void';
+		$res['metric'] = array();
+		$res['metric']['general'] = array();
+		$res['metric']['microbe'] = array();
+		$res['metric']['potency'] = array();
+		$res['metric']['solvent'] = array();
+		$res['metric']['terpene'] = array();
 
 		return $RES->withJSON(array(
 			'status' => 'success',
-			'result' => $prod
-		));
+			'result' => $res,
+		), 200, JSON_PRETTY_PRINT);
 
 	}
 }
