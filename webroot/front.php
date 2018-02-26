@@ -28,7 +28,9 @@ $app->group('/network', function() {
 		;
 
 	// A Ping Responds with PONG, and some useful information
-	$this->get('/ping', 'Network_Ping');
+	$this->get('/ping', 'Network_Ping')
+		->add('Middleware_Verify_DNS')
+		;
 
 });
 

@@ -36,6 +36,17 @@ class Network_Peer
 
 		file_put_contents($file, $data);
 
+		// Verify via Keybase
+		$p0 = $REQ->getAttribute('peer');
+		$p1 = $REQ->getAttribute('peer_openthc');
+
+		if ($p0 != $p1) {
+			return $RES->withJSON(array(
+				'status' => 'success',
+				'detail' => 'CNP#046: PTR and TXT records do not match',
+			));
+		}
+
 		return $RES->withJSON(array(
 			'status' => 'success',
 			'detail' => 'Peer Registered',

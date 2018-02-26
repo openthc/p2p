@@ -28,8 +28,7 @@ class Middleware_Verify_DNS
 			$ipv6 = $ipxx;
 		}
 
-
-		$peer = gethostbyaddr($ipv4);
+		$peer = gethostbyaddr($ipxx);
 		//echo "peer:$peer\n";
 
 		$peer_domain = $this->getDomain($peer);
