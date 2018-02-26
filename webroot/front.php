@@ -23,7 +23,9 @@ $app->group('/network', function() {
 	});
 
 	// Request to join this Peer
-	$this->post('/peer', 'Network_Peer');
+	$this->post('/peer', 'Network_Peer')
+		->add('Middleware_Verify_DNS')
+		;
 
 	// A Ping Responds with PONG, and some useful information
 	$this->get('/ping', 'Network_Ping');
@@ -59,8 +61,7 @@ $app->group('/object', function() {
 //$app->get('/search', 'Example_Search');
 $app->get('/search', 'Search')
 //	->add('Middleware_Verify_HMAC')
-//	->add('Middleware_Verify_Self')
-//	->add('Middleware_Verify_DNS');
+	->add('Middleware_Verify_Self')
 	;
 
 

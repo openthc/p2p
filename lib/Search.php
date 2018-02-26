@@ -11,6 +11,14 @@ class Search
 		$obj_type = $_GET['object'];
 		$obj_guid = $_GET['guid'];
 
+		$auth = $REQ->getAttribute('auth');
+		if (empty($auth)) {
+			return $RES->withJSON(array(
+				'status' => 'failure',
+				'detail' => 'Not Authorized',
+			), 403);
+		}
+
 		$res = $this->_search_parallel($lic_code, $obj_type, $obj_guid);
 
 		return $RES->withJSON(array(

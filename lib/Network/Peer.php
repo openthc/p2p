@@ -5,39 +5,42 @@
 
 class Network_Peer
 {
-	function __invoke($REQ, $RES, $ARG) {
+	function __invoke($REQ, $RES, $ARG)
+	{
 
-		header('Content-Type: text/plain');
-		echo "\n";
-		print_r($_POST);
-		//echo "\nConnected\n";
-
-		$peer_id = $_SERVER['HTTP_X_PEER'];
-		if (empty($peer_id)) {
+		$peer = $REQ->getAttribute('peer');
+		if (empty($peer)) {
 			return $RES->withJSON(array(
 				'status' => 'failure',
-				'detail' => 'Provide the X-Peer header',
-			));
+				'detail' => 'Peer Not Identified, check DNS A, AAAA, PTR and TXT',
+			), 400);
 		}
-		if (!preg_match('/^\w[\w\-\.]+\.\w+$/', $peer_id)) {
+		//var_dump($peer);
+
+		$peer_domain = $REQ->getAttribute('peer_domain');
+		if (empty($peer_domain)) {
 			return $RES->withJSON(array(
 				'status' => 'failure',
-				'detail' => 'Invalid Peer ID',
-			));
+				'detail' => 'Peer Not Identified, check DNS A, AAAA, PTR and TXT',
+			), 400);
 		}
+		//var_dump($peer_domain);
 
-		$peer_ip = $_SERVER['REMOTE_ADDR'];
+		$file = sprintf('%s/var/network/%s/peer.json', APP_ROOT, $peer_domain);
+		$data = json_encode(array(
+			'peer' => $peer,
+			'domain' => $peer_domain,
+			'keybase' => $REQ->getAttribute('peer_keybase'),
+			'openthc' => $REQ->getAttribute('peer_openthc'),
+		));
 
-		// Lookup Peer IP from
-		$peer_ip_list = gethostbynamel($peer_id);
-		print_r($peer_ip_list);
+		file_put_contents($file, $data);
 
-		// Verify Host
-
-		// Inspect their KeyBase DNS?
-
-		// Add to Peer List
-		//$redis->lpush($host);
+		return $RES->withJSON(array(
+			'status' => 'success',
+			'detail' => 'Peer Registered',
+		));
 
 	}
+
 }
