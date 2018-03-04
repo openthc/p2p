@@ -2,6 +2,9 @@
 /**
 	Execute a Search from the Command Line
 */
+namespace App\lib\cli;
+
+use App\lib\Search;
 
 if (empty($argv[4])) {
 	echo "  search OBJECT LICENSE GUID\n";

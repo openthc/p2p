@@ -2,6 +2,9 @@
 /**
 	OpenTHC P2P Bootstrap
 */
+namespace App;
+
+require_once __DIR__.'vendor/autoload.php';
 
 // Update to your own values
 define('APP_NAME', 'OpenTHC P2P');

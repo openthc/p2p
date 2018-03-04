@@ -2,6 +2,7 @@
 /**
 	Verify the Secret of the HTTP Request
 */
+namespace App\Lib\Middleware\Verify;
 
 class Middleware_Verify_Secret
 {

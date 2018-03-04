@@ -4,6 +4,7 @@
 	You may wish to over-ride this with a database hander or something
 	The file-system method was implemented to make it easier to get started.
 */
+namespace App\lib;
 
 class Network
 {
@@ -28,7 +29,7 @@ class Network
 
 		$host_file = sprintf('%s/var/network/%s/peer.json', APP_ROOT, $p);
 		if (!is_file($host_file)) {
-			throw new Exception('ALN#028: Peer Not Found');
+			throw new \Exception('ALN#028: Peer Not Found');
 			return null;
 		}
 

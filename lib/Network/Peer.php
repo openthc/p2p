@@ -2,6 +2,7 @@
 /**
 	Another Service-Node wants to Peer with Us
 */
+namespace App\Lib\Network;
 
 class Network_Peer
 {
