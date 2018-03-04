@@ -2,9 +2,10 @@
 /**
 	Respond to Network Ping
 */
-namespace App\lib\Network;
 
-class Network_Ping
+namespace App\lib\Controller\Network;
+
+class Ping
 {
 	/**
 		Just Reply with PONG

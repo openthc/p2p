@@ -3,7 +3,9 @@
 	Verify DNS of the Peer
 */
 
-class Middleware_Verify_DNS
+namespace App\lib\Middleware\Verify;
+
+class DNS
 {
 	public function __invoke($REQ, $RES, $NMW)
 	{

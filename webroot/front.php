@@ -8,6 +8,8 @@ use Slim\App;
 use Slim\Container;
 use PDO;
 
+use App\lib\Network;
+
 require_once(dirname(dirname(__FILE__)) . '/boot.php');
 
 // See Below
@@ -23,18 +25,18 @@ $app->group('/network', function() {
 
 		$host_list = Network::listPeers();
 
-		return $RES->withJSON($host_list);
-
+		$RES = $RES->withJSON($host_list);
+		return $RES;
 	});
 
 	// Request to join this Peer
-	$this->post('/peer', 'Network_Peer')
-		->add('Middleware_Verify_DNS')
+	$this->post('/peer', 'App\lib\Controller\Network\Peer')
+		->add('App\lib\Middleware\Verify\DNS')
 		;
 
 	// A Ping Responds with PONG, and some useful information
-	$this->get('/ping', 'Network_Ping')
-		->add('Middleware_Verify_DNS')
+	$this->get('/ping', 'App\lib\Controller\Network\Ping')
+		->add('App\lib\Middleware\Verify\DNS')
 		;
 
 });
