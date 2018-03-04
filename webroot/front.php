@@ -47,19 +47,19 @@ $app->group('/object', function() {
 	//$this->get('/lot/{license}/{guid}', 'Disable_Disable');
 
 	// Share Lot Details
-	$this->get('/lot/{license}/{guid}', 'Example_Lot');
+	$this->get('/lot/{license}/{guid}', 'App\lib\Example\Lot');
 
 	// Share Product data
-	$this->get('/product/{license}/{guid}', 'Example_Product');
+	$this->get('/product/{license}/{guid}', 'App\lib\Example\Product');
 
 	// Share QA data
-	$this->get('/qa/{license}/{guid}', 'Example_QA');
+	$this->get('/qa/{license}/{guid}', 'App\lib\Example\QA');
 
 	// Share Strain data
-	$this->get('/strain/{license}/{guid}', 'Example_Strain');
+	$this->get('/strain/{license}/{guid}', 'App\lib\Example\Strain');
 
 })
-->add('Middleware_Verify_Secret')
+->add('App\lib\Middleware\Verify\Secret')
 //->add('Middleware_Custom_Magic')
 ;
 

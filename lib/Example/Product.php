@@ -9,9 +9,10 @@
 	Naturally, this is a dummy implementation
 
 */
+
 namespace App\lib\Example;
 
-class Example_Product extends Example_Base
+class Product extends Base
 {
 	function __invoke($REQ, $RES, $ARG)
 	{

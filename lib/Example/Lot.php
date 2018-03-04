@@ -9,9 +9,10 @@
 	Naturally, this is a dummy implementation
 
 */
+
 namespace App\lib\Example;
 
-class Example_Lot extends Example_Base
+class Lot extends Base
 {
 	function __invoke($REQ, $RES, $ARG) {
 
