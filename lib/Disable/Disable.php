@@ -2,6 +2,7 @@
 /**
 	A Disabled Interface
 */
+namespace App\lib\Disable;
 
 class Disable_Disable
 {
