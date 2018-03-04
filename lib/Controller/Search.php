@@ -2,7 +2,10 @@
 /**
 	Search All Peers
 */
-namespace App\lib;
+
+namespace App\lib\Controller;
+
+use App\lib\Network;
 
 class Search
 {
@@ -20,12 +23,34 @@ class Search
 			), 403);
 		}
 
+		if (empty($lic_code)) {
+			return $RES->withJSON(array(
+				'status' => 'failure',
+				'detail' => 'License Owner Missing',
+			), 400);
+		}
+
+		if (empty($obj_type)) {
+			return $RES->withJSON(array(
+				'status' => 'failure',
+				'detail' => 'Object Type Missing',
+			), 400);
+		}
+
+		if (empty($obj_guid)) {
+			return $RES->withJSON(array(
+				'status' => 'failure',
+				'detail' => 'Object GUID Missing',
+			), 400);
+		}
+
 		$res = $this->_search_parallel($lic_code, $obj_type, $obj_guid);
 
 		return $RES->withJSON(array(
 			'status' => 'success',
 			'result' => $res,
 		));
+
 	}
 
 	/**
@@ -35,21 +60,17 @@ class Search
 	{
 		$ret_list = array();
 
-		$peer_list = Network::listPeers();
+		$url_list = $this->_make_search_list($obj_type, $lic_code, $obj_guid);
 
-		foreach ($peer_list as $peer) {
+		foreach ($url_list as $peer => $url) {
 
-			$peer_info = Network::loadPeer($peer);
-
-			$url = sprintf('https://%s/object/%s/%s/%s', $peer_info['peer'], $obj_type, $lic_code, $obj_guid);
-			//echo "Ping: $url\n";
 			$ch = $this->_curl_init($url);
-			//$add = curl_multi_add_handle($cmx, $req_list[ $peer ]);
-			//echo "Add: $add\n";
+
 			$res = curl_exec($ch);
 			$inf = curl_getinfo($ch);
+
 			if (200 == $inf['http_code']) {
-				$ret_list[] = json_decode($res, true);
+				$ret_list[ $peer ] = json_decode($res, true);
 			}
 		}
 
@@ -68,14 +89,10 @@ class Search
 
 		$cmx = curl_multi_init();
 
-		$peer_list = Network::listPeers();
-		foreach ($peer_list as $peer) {
+		$url_list = $this->_make_search_list($obj_type, $lic_code, $obj_guid);
 
-			$peer_info = Network::loadPeer($peer);
+		foreach ($url_list as $peer => $url) {
 
-			$url = sprintf('https://%s/object/%s/%s/%s', $peer_info['peer'], $obj_type, $lic_code, $obj_guid);
-
-			// echo "url=$url\n";
 			$req_list[ $peer ] = $this->_curl_init($url);
 			$add = curl_multi_add_handle($cmx, $req_list[ $peer ]);
 
@@ -119,6 +136,27 @@ class Search
 		curl_multi_close($cmx);
 
 		return $ret_list;
+	}
+
+	/**
+		Get the List of Peers to Search
+	*/
+	private function _make_search_list($obj_type, $lic_code, $obj_guid)
+	{
+		$url_list = array();
+
+		$peer_list = Network::listPeers();
+		foreach ($peer_list as $peer) {
+
+			$info = Network::loadPeer($peer);
+
+			$url = sprintf('https://%s/object/%s/%s/%s', $info['peer'], $obj_type, $lic_code, $obj_guid);
+
+			$url_list[$peer] = $url;
+
+		}
+
+		return $url_list;
 	}
 
 	private function _curl_init($url)

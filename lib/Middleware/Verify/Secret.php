@@ -59,7 +59,6 @@ class Secret
 				$json_file = sprintf('%s/peer.json', $path);
 				$json_data = file_get_contents($json_file);
 				$peer_data = json_decode($json_data, true);
-				//var_dump($peer_data);
 				return $peer_data;
 			}
 		}

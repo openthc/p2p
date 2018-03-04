@@ -61,16 +61,16 @@ $app->group('/object', function() {
 	$this->get('/strain/{license}/{guid}', 'App\lib\Example\Strain');
 
 })
-->add('App\lib\Middleware\Verify\Secret')
-//->add('Middleware_Custom_Magic')
-;
+	//->add('Middleware_Custom_Magic')
+	->add('App\lib\Middleware\Verify\Secret')
+	;
 
 
 // Trusted Host query /Search to search the network
-//$app->get('/search', 'Example_Search');
-$app->get('/search', 'Search')
-//	->add('Middleware_Verify_HMAC')
-	->add('Middleware_Verify_Self')
+$app->get('/search', 'App\lib\Controller\Search')
+	->add('App\lib\Middleware\Verify\Localhost')
+	->add('App\lib\Middleware\Verify\Myself')
+	->add('App\lib\Middleware\Verify\Secret')
 	;
 
 
