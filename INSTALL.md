@@ -7,7 +7,7 @@ These instructions are for Debian 9 and assume that operating the p2p node is th
 
 	apt-get -qqy update
 	apt-get -qqy upgrade
-	apt-get -qqy install openntpd
+	apt-get -qqy install dnsutils openntpd redis-server sqlite3
 	apt-get -qqy install libapache2-mod-php
 	apt-get -qqy install php-cli php-curl php-dev php-gd php-gnupg php-mbstring php-mcrypt php-zip
 
