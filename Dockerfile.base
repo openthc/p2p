@@ -1,0 +1,47 @@
+# P2P Environment Specific docker directives
+FROM php:7.1-apache
+
+# Configuration Environment Variables
+ENV APP_HOST p2p.example.com
+ENV APP_ROOT /opt/p2p
+
+# Environment Variables
+ENV APP_USER www-data
+ENV COMPOSER_DIR /opt/.composer
+ENV VENDOR_DIR ${APP_ROOT}/vendor/bin
+ENV PATH ${COMPOSER_DIR}:${VENDOR_DIR}:${PATH}
+
+RUN echo "deb http://ftp.debian.org/debian jessie-backports main" | tee -a /etc/apt/sources.list
+RUN apt-get update 
+RUN apt-get upgrade -y 
+RUN apt-get install -y \
+    libcurl4-gnutls-dev \
+    git \
+    dnsutils \
+    openntpd \
+    redis-server \
+    sqlite3 \
+    libgpgme11 \
+    libgpgme11-dev \
+    libpng12-dev \
+    libmcrypt-dev
+RUN docker-php-ext-install \ 
+    curl \
+    gd \
+    mbstring \
+    mcrypt \
+    sockets \
+    zip
+RUN docker-php-source extract 
+RUN pecl update-channels 
+RUN pecl install gnupg
+RUN apt-get install -y python-certbot-apache -t jessie-backports
+
+ADD ./etc/apache2.docker.conf ${APACHE_CONFDIR}/apache2.conf
+
+RUN mkdir -p ${COMPOSER_DIR} \
+    && curl https://getcomposer.org/installer | php \
+    && mv ./composer.phar ${COMPOSER_DIR}/composer 
+
+WORKDIR ${APP_ROOT}
+RUN chown ${APP_USER}:${APP_USER} ${APP_ROOT}
