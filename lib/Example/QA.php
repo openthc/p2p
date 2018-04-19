@@ -25,6 +25,8 @@ class QA extends Base
 			return $x;
 		}
 
+		$s = $this->generateStrain($license, $guid);
+
 		$res = array();
 		$res['status'] = 'pass|fail|void';
 		$res['metric'] = array();

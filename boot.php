@@ -15,15 +15,6 @@ openlog('openthc-p2p', LOG_ODELAY|LOG_PID, LOG_LOCAL0);
 
 error_reporting((E_ALL|E_STRICT) ^ E_NOTICE);
 
-// My Cheap-Ass AutoLoader
-//spl_autoload_register(function($c) {
-//	$c = str_replace('_', '/', $c);
-//	$f = sprintf('%s/lib/%s.php', APP_ROOT, $c);
-//	if (is_file($f)) {
-//		require_once($f);
-//	}
-//}, true, false);
-
 // Composer Stuff
 $fva = APP_ROOT . '/vendor/autoload.php';
 if (!is_file($fva)) {

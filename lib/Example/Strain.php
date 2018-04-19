@@ -25,12 +25,13 @@ class Strain extends Base
 			return $x;
 		}
 
+		$s = $this->generateStrain($license, $guid);
+
 		return $RES->withJSON(array(
 			'status' => 'success',
 			'result' => array(
-				'opk' => '1000',
 				'guid' => $guid,
-				'name' => 'Example Strain Name',
+				'name' => $s,
 			),
 		), 200, JSON_PRETTY_PRINT);
 

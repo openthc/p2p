@@ -24,26 +24,17 @@ class Lot extends Base
 			return $x;
 		}
 
+		$p = $this->generateProduct($license, $guid);
+
 		return $RES->withJSON(array(
 			'status' => 'success',
-			'result' => array(
-				'guid' => $guid,
-				'base' => 'GobStopper',
-				'name' => 'GobStopper 7g',
-				'strain' => array(
-					'name' => 'GobStopper',
-				),
-				'package' => array(
-					'type' => 'each',
-					'size' => 7,
-					'unit' => 'g',
-				),
-			)
+			'result' => $p,
 		), 200, JSON_PRETTY_PRINT);
 	}
 
 	function returnLiquidEdible()
 	{
+		$s = $this->generateStrain($license, $guid);
 
 		return $RES->withJSON(array(
 			'status' => 'success',
