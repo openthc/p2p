@@ -3,7 +3,7 @@
 	Another Service-Node wants to Peer with Us
 */
 
-namespace App\lib\Controller\Network;
+namespace App\Controller\Network;
 
 class Peer
 {
@@ -45,7 +45,7 @@ class Peer
 			), 400, JSON_PRETTY_PRINT);
 		}
 
-		$file = sprintf('%s/var/network/%s/peer.json', APP_ROOT, $peer_domain);
+		$file = sprintf('%s/var/network/%s/public.json', APP_ROOT, $peer_domain);
 		$data = json_encode(array(
 			'peer' => $peer,
 			'domain' => $peer_domain,

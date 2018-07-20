@@ -9,19 +9,23 @@ class Localhost
 {
 	public function __invoke($REQ, $RES, $NMW)
 	{
-		$is_local = false;
+		$good = false;
 
 		$client = $_SERVER['REMOTE_ADDR'];
 
 		if ('127.0.0.1' == $client) {
-			$is_local = true;
+			$good = true;
 		}
 
 		if ($_SERVER['REMOTE_ADDR'] == $_SERVER['SERVER_ADDR']) {
-			$is_local = true;
+			$good = true;
 		}
 
-		$REQ = $REQ->withAttribute('is-local', $auth);
+		if (!$good) {
+			return $RES->withStatus(403);
+		}
+
+		$REQ = $REQ->withAttribute('is-local', true);
 
 		$RES = $NMW($REQ, $RES);
 

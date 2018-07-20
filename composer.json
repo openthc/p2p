@@ -4,7 +4,7 @@
   "license": "MIT",
   "autoload": {
     "psr-4": {
-      "App\\": "."
+      "App\\": "./lib"
     }
   },
   "require": {
@@ -16,7 +16,7 @@
     "ext-PDO": "*",
     "ext-session": "*",
     "ext-sockets": "*",
-    "slim/slim": "3.9.2",
+    "slim/slim": "3.10.0",
     "guzzlehttp/guzzle": "^6.3"
   },
   "require-dev": {

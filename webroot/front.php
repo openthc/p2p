@@ -3,7 +3,6 @@
 	Front Controller for OpenTHC P2P
 */
 
-use PDO;
 use Slim\App;
 use Slim\Container;
 use App\Network;
@@ -19,7 +18,6 @@ $app->group('/network', function() {
 	// $this is the App
 
 	// Request to view Peer List
-	// $this->get('', 'App\Controller\Network\Info');
 	$this->get('', function($REQ, $RES, $ARG) {
 
 		$host_list = Network::listPeers();
@@ -29,6 +27,10 @@ $app->group('/network', function() {
 		return $RES;
 
 	});
+
+	$this->get('/info', 'App\Controller\Network\Info')
+		->add('App\Middleware\Verify\Localhost')
+		;
 
 	// Request to join this Peer
 	$this->post('/peer', 'App\Controller\Network\Peer')
@@ -50,17 +52,16 @@ $app->group('/object/{L0}', function() {
 	$this->get('/transfer/{GUID}', 'App\Example\Transfer');
 
 })
-->add('App\Middleware\Auth\LicenseAsk')
-->add('App\Middleware\Auth\PeerID')
-->add('App\Middleware\Verify\Secret')
-->add('App\Middleware\Verify\HMAC')
+//->add('App\Middleware\Auth\LicenseAsk')
+//->add('App\Middleware\Auth\PeerID')
+//->add('App\Middleware\Verify\Secret')
+//->add('App\Middleware\Verify\HMAC')
 ;
 
 
 // Trusted Host query /Search to search the network
 $app->get('/search', 'App\Controller\Search')
 	->add('App\Middleware\Verify\Localhost')
-	->add('App\Middleware\Verify\Myself')
 	->add('App\Middleware\Verify\Secret')
 	;
 
@@ -72,8 +73,9 @@ $app->get('/search', 'App\Controller\Search')
 //$app->add('App\Middleware\Verify\Peer_Service');
 //$app->add('App\Middleware\Verify\Signature');
 //$app->add('App\Middleware\Verify\DNS');
-$app->add('App\Middleware\Filter\RateLimit');
-$app->add('App\Middleware\Log\HTTP');
+//$app->add('App\Middleware\Filter\RateLimit');
+//$app->add('App\Middleware\Log\File');
+//$app->add('App\Middleware\Log\HTTP');
 
 $app->run();
 
@@ -119,7 +121,7 @@ function _new_slim_app()
 				->withHeader('Allow', implode(', ', $methods))
 				->withJSON(array(
 					'status' => 'failure',
-					'detail' => 'Not Allowed [HEC#405]',
+					'detail' => 'Method Not Allowed [HEC#405]',
 				));
 		};
 	};
@@ -137,6 +139,7 @@ function _new_slim_app()
 	};
 
 	//unset($con['errorHandler']);
+	//unset($con['phpErrorHandler']);
 
 	// Database Connection
 	$con['db'] = function ($c) {
@@ -159,10 +162,10 @@ function _new_slim_app()
 		// Sqlite
 		// $dsn = sprintf('sqlite:%s', $cfg['filename']);
 
-		$pdo = new PDO($dsn, $cfg['username'], $cfg['password']);
+		$pdo = new \PDO($dsn, $cfg['username'], $cfg['password']);
 
-		$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-		$pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
+		$pdo->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
+		$pdo->setAttribute(\PDO::ATTR_DEFAULT_FETCH_MODE, \PDO::FETCH_ASSOC);
 
 		return $pdo;
 	};
