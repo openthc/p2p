@@ -8,7 +8,7 @@ define('APP_HOST', 'p2p.openthc.org');
 define('APP_NAME', 'OpenTHC P2P');
 define('APP_ROOT', __DIR__);
 define('APP_SITE', 'https://' . APP_HOST);
-define('APP_SALT', md5(APP_HOST . APP_NAME . APP_ROOT . APP_SITE));q
+define('APP_SALT', md5(APP_HOST . APP_NAME . APP_ROOT . APP_SITE));
 
 openlog('openthc-p2p', LOG_ODELAY|LOG_PID, LOG_LOCAL0);
 

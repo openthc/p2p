@@ -4,7 +4,6 @@
 
 [base]
 	root = "/opt/p2p"
-	host = "openthc.org"
 	peer = "p2p.openthc.org"
 
 

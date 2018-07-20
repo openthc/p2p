@@ -1,8 +1,11 @@
 composer.lock
 composer.phar
+
 etc/app.ini
 etc/ssl
 node_modules/
 var/
 vendor/
-.idea/
+
+**/.idea/workspace.xml
+**/.idea/tasks.xml
