@@ -73,7 +73,7 @@ $app->get('/search', 'App\Controller\Search')
 //$app->add('App\Middleware\Verify\Peer_Service');
 //$app->add('App\Middleware\Verify\Signature');
 //$app->add('App\Middleware\Verify\DNS');
-//$app->add('App\Middleware\Filter\RateLimit');
+$app->add('App\Middleware\Filter\RateLimit');
 //$app->add('App\Middleware\Log\File');
 //$app->add('App\Middleware\Log\HTTP');
 
