@@ -3,7 +3,7 @@
 	Verify the Request is coming from localhost
 */
 
-namespace App\lib\Middleware\Verify;
+namespace App\Middleware\Verify;
 
 class Localhost
 {

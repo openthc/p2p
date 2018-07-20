@@ -9,10 +9,10 @@ These instructions are for Debian 9 and assume that operating the p2p node is th
 	apt-get -qqy upgrade
 	apt-get -qqy install dnsutils openntpd redis-server sqlite3
 	apt-get -qqy install libapache2-mod-php
-	apt-get -qqy install php-cli php-curl php-dev php-gd php-gnupg php-mbstring php-mcrypt php-zip
+	apt-get -qqy install php-cli php-curl php-dev php-gd php-gnupg php-mbstring php-mcrypt php-redis php-zip
 
 	# You may want:
-	apt-get -qqy install php-geoip php-mysql php-pgsql php-redis php-ssh2 php-xdebug
+	apt-get -qqy install php-geoip php-mysql php-pgsql php-ssh2 php-xdebug
 
 This application, or at least parts of it, depend on Keybase, see https://keybase.io/docs/the_app/install_linux for details.
 

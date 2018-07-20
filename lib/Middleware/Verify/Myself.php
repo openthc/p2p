@@ -4,7 +4,7 @@
 	Sets the 'auth' attribute
 */
 
-namespace App\lib\Middleware\Verify;
+namespace App\Middleware\Verify;
 
 class Myself
 {

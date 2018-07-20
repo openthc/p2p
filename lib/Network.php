@@ -5,7 +5,7 @@
 	The file-system method was implemented to make it easier to get started.
 */
 
-namespace App\lib;
+namespace App;
 
 class Network
 {

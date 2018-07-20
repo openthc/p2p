@@ -2,75 +2,66 @@
 /**
 	Front Controller for OpenTHC P2P
 */
-namespace App\webroot;
 
+use PDO;
 use Slim\App;
 use Slim\Container;
-use PDO;
-
-use App\lib\Network;
+use App\Network;
 
 require_once(dirname(dirname(__FILE__)) . '/boot.php');
 
 // See Below
 $app = _new_slim_app();
 
-// Network Info, List, Peer, Ping
+// Network Interface - Info, List, Peer, Ping
 $app->group('/network', function() {
 
 	// $this is the App
 
 	// Request to view Peer List
+	// $this->get('', 'App\Controller\Network\Info');
 	$this->get('', function($REQ, $RES, $ARG) {
 
 		$host_list = Network::listPeers();
 
 		$RES = $RES->withJSON($host_list);
+
 		return $RES;
+
 	});
 
 	// Request to join this Peer
-	$this->post('/peer', 'App\lib\Controller\Network\Peer')
-		->add('App\lib\Middleware\Verify\DNS')
+	$this->post('/peer', 'App\Controller\Network\Peer')
+		->add('App\Middleware\Verify\DNS')
 		;
 
 	// A Ping Responds with PONG, and some useful information
-	$this->get('/ping', 'App\lib\Controller\Network\Ping')
-		->add('App\lib\Middleware\Verify\DNS')
-		;
+	$this->get('/ping', 'App\Controller\Network\Ping');
 
 });
 
+// Object Query Interface
+$app->group('/object/{L0}', function() {
 
-// Lookup Specific Datas
-$app->group('/object', function() {
-
-	// Set to this to disable that interface
-	//$this->get('/lot/{license}/{guid}', 'Disable_Disable');
-
-	// Share Lot Details
-	$this->get('/lot/{license}/{guid}', 'App\lib\Example\Lot');
-
-	// Share Product data
-	$this->get('/product/{license}/{guid}', 'App\lib\Example\Product');
-
-	// Share QA data
-	$this->get('/qa/{license}/{guid}', 'App\lib\Example\QA');
-
-	// Share Strain data
-	$this->get('/strain/{license}/{guid}', 'App\lib\Example\Strain');
+	$this->get('/lot/{GUID}', 'App\Example\Lot');
+	$this->get('/product/{GUID}', 'App\Example\Product');
+	$this->get('/qa/{GUID}', 'App\Example\Product');
+	$this->get('/strain/{GUID}', 'App\Example\Product');
+	$this->get('/transfer/{GUID}', 'App\Example\Transfer');
 
 })
-	//->add('Middleware_Custom_Magic')
-	->add('App\lib\Middleware\Verify\Secret')
-	;
+->add('App\Middleware\Auth\LicenseAsk')
+->add('App\Middleware\Auth\PeerID')
+->add('App\Middleware\Verify\Secret')
+->add('App\Middleware\Verify\HMAC')
+;
 
 
 // Trusted Host query /Search to search the network
-$app->get('/search', 'App\lib\Controller\Search')
-	->add('App\lib\Middleware\Verify\Localhost')
-	->add('App\lib\Middleware\Verify\Myself')
-	->add('App\lib\Middleware\Verify\Secret')
+$app->get('/search', 'App\Controller\Search')
+	->add('App\Middleware\Verify\Localhost')
+	->add('App\Middleware\Verify\Myself')
+	->add('App\Middleware\Verify\Secret')
 	;
 
 
@@ -78,11 +69,11 @@ $app->get('/search', 'App\lib\Controller\Search')
 	These are various ideas of Middleware that could(should?) be added
 */
 // Adding Concentric Rings of Middleware, Inner => Outer
-// $app->add('Middleware_Verify_Peer_Service');
-// $app->add('Middleware_Verify_Signature');
-// $app->add('Middleware_Verify_DNS');
-// $app->add('Middleware_Filter_RateLimit');
-// $app->add('Middleware_Log_HTTP');
+//$app->add('App\Middleware\Verify\Peer_Service');
+//$app->add('App\Middleware\Verify\Signature');
+//$app->add('App\Middleware\Verify\DNS');
+$app->add('App\Middleware\Filter\RateLimit');
+$app->add('App\Middleware\Log\HTTP');
 
 $app->run();
 
@@ -115,7 +106,7 @@ function _new_slim_app()
 		return function ($REQ, $RES) {
 			return $RES->withJSON(array(
 				'status' => 'failure',
-				'detail' => 'Not Found',
+				'detail' => 'Not Found [HEC#404]',
 			), 404);
 		};
 	};
@@ -128,7 +119,7 @@ function _new_slim_app()
 				->withHeader('Allow', implode(', ', $methods))
 				->withJSON(array(
 					'status' => 'failure',
-					'detail' => 'Not Allowed',
+					'detail' => 'Not Allowed [HEC#405]',
 				));
 		};
 	};
@@ -140,7 +131,7 @@ function _new_slim_app()
 				->withStatus(500)
 				->withJSON(array(
 					'status' => 'failure',
-					'detail' => 'Server Error',
+					'detail' => 'Server Error [HEC#500]',
 				));
 		};
 	};

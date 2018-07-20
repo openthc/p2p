@@ -3,7 +3,7 @@
 	Verify DNS of the Peer
 */
 
-namespace App\lib\Middleware\Verify;
+namespace App\Middleware\Verify;
 
 class DNS
 {
