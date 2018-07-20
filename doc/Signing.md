@@ -1,28 +1,33 @@
 # Signing Requests
 
-All requests for information from each peer needs to be signed.
+All requests for information from each peer needs to be signed using an HMAC
 
 ## Canonicalize the Request
 
-The canonical method for rolling the request together is effectively
+The canonical method for rolling the request together is simply folding these values together with a new line, trim whitespace and generate an SHA1 hash.
+All these values are case sensitive.
+$VERB should be in UPPER case, $HOST_SECRET, $PATH and $ARGS_SORTED should be in the natural case on the wire.
+$ARGS_SORTED takes the query string arguments, sorts by key and reassembles.
+$ARGS_SORTED MUST NOT have key names duplicated, for maximum interoperabality one SHOULD only use scalar data as values.
 
+	$HOST_SECRET
 	$VERB
 	$PATH
-	$ARGS
-	date: $DATE
-	host: $HOST
+	$ARGS_SORTED
 
 For example:
 
 	GET
-	/license/X999999/log/ABC123
+	/object/lot/ABC123
+	aa=bb&cc=dd&ee=ff
 
-	date: 2017-01-01 18:00:00
-	host: p2p.openthc.org
+And this folds into
+
+	"GET\n/object/lot/ABC123\naa=bb&cc=dd&ee=ff"
 
 The result of this constructed and hash with sha256 is
 
-	d9d52ca82520e52f7d934f56a7153bfbb085aa4a91acb67a796250e91fc00733
+	$sig = hmac_sha1($HOST_SECRET, $DATA);
 
 Save this Request-Hash for usage later.
 
@@ -30,9 +35,6 @@ Save this Request-Hash for usage later.
 
 
 ## Sign Request
-
-
-
 
 ### See Also
 
