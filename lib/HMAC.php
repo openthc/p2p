@@ -5,6 +5,8 @@
 	@see https://docs.aws.amazon.com/AmazonS3/latest/dev/RESTAuthentication.html
 */
 
+namespace App;
+
 class HMAC
 {
 	public $_data;

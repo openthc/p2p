@@ -3,9 +3,9 @@
 	Search All Peers
 */
 
-namespace App\lib\Controller;
+namespace App\Controller;
 
-use App\lib\Network;
+use App\Network;
 
 class Search
 {

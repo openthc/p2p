@@ -10,7 +10,7 @@
 
 */
 
-namespace App\lib\Example;
+namespace App\Example;
 
 class Product extends Base
 {

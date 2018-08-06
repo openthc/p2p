@@ -8,7 +8,9 @@
 
 */
 
-class Middleware_Verify_HMAC
+namespace App\Middleware\Verify;
+
+class HMAC
 {
 	public function __invoke($REQ, $RES, $NMW)
 	{

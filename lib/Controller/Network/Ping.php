@@ -3,7 +3,7 @@
 	Respond to Network Ping
 */
 
-namespace App\lib\Controller\Network;
+namespace App\Controller\Network;
 
 class Ping
 {
