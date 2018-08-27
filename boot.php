@@ -12,7 +12,7 @@ define('APP_SALT', md5(APP_HOST . APP_NAME . APP_ROOT . APP_SITE));
 
 openlog('openthc-p2p', LOG_ODELAY|LOG_PID, LOG_LOCAL0);
 
-error_reporting((E_ALL|E_STRICT) ^ E_NOTICE);
+error_reporting(E_ALL & ~ E_NOTICE);
 
 // Composer Stuff
 $fva = APP_ROOT . '/vendor/autoload.php';
