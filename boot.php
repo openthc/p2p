@@ -1,18 +1,32 @@
 <?php
 /**
-	OpenTHC P2P Bootstrap
-*/
+ * OpenTHC P2P - Bootstrap
+ *
+ * This file is part of OpenTHC P2P Application
+ *
+ * OpenTHC P2P Application is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License version 3 as published by
+ * the Free Software Foundation.
+ *
+ * OpenTHC P2P Application is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with OpenTHC P2P Application.  If not, see <https://www.gnu.org/licenses/>.
+ */
 
 // Update to your own values
 define('APP_HOST', 'p2p.openthc.org');
 define('APP_NAME', 'OpenTHC P2P');
 define('APP_ROOT', __DIR__);
 define('APP_SITE', 'https://' . APP_HOST);
-define('APP_SALT', md5(APP_HOST . APP_NAME . APP_ROOT . APP_SITE));
-
-openlog('openthc-p2p', LOG_ODELAY|LOG_PID, LOG_LOCAL0);
+define('APP_SALT', sha1(APP_HOST . APP_NAME . APP_ROOT . APP_SITE));
 
 error_reporting(E_ALL & ~ E_NOTICE);
+
+openlog('openthc-p2p', LOG_ODELAY|LOG_PID, LOG_LOCAL0);
 
 // Composer Stuff
 $fva = APP_ROOT . '/vendor/autoload.php';

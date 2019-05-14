@@ -1,7 +1,21 @@
 <?php
 /**
-	Front Controller for OpenTHC P2P
-*/
+ * OpenTHC P2P - Front Controller
+ *
+ * This file is part of OpenTHC P2P Application
+ *
+ * OpenTHC P2P is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License version 3 as published by
+ * the Free Software Foundation.
+ *
+ * OpenTHC P2P is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with OpenTHC P2P.  If not, see <https://www.gnu.org/licenses/>.
+ */
 
 use Slim\App;
 use Slim\Container;
