@@ -20,5 +20,6 @@
     "guzzlehttp/guzzle": "6.3.3"
   },
   "require-dev": {
+    "phpunit/phpunit": "8.2.5"
   }
 }

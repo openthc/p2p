@@ -177,9 +177,10 @@ function _new_slim_app()
 		// $dsn = sprintf('sqlite:%s', $cfg['filename']);
 
 		$pdo = new \PDO($dsn, $cfg['username'], $cfg['password']);
-
-		$pdo->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
+		$pdo->setAttribute(\PDO::ATTR_CASE, \PDO::CASE_NATURAL);
 		$pdo->setAttribute(\PDO::ATTR_DEFAULT_FETCH_MODE, \PDO::FETCH_ASSOC);
+		$pdo->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
+		$pdo->setAttribute(\PDO::ATTR_ORACLE_NULLS, \PDO::NULL_EMPTY_STRING);
 
 		return $pdo;
 	};
