@@ -1,7 +1,7 @@
 <?php
 /**
-	Another Service-Node wants to Peer with Us
-*/
+ * Spew Information about my Network
+ */
 
 namespace App\Controller\Network;
 
@@ -16,6 +16,10 @@ class Info
 			$info[$peer] = \App\Network::loadPeer($peer);
 		}
 
-		return $RES->withJSON($info, 200, JSON_PRETTY_PRINT);
+		return $RES->withJSON([
+			'meta' => [],
+			'data' => $info,
+		], 200);
+
 	}
 }
