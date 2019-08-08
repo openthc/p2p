@@ -24,6 +24,12 @@
 
 	</php>
 
+	<testsuites>
+		<testsuite name="All The Things">
+			<directory>.</directory>
+		</testsuite>
+	</testsuites>
+
 	<logging>
 		<!-- <log type="coverage-html" target="../webroot/test-output" /> -->
 		<log type="junit" target="../webroot/test-output/phpunit.xml" />
