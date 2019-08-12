@@ -43,7 +43,7 @@ class RateLimit
 			return $RES->withJSON(array(
 				'status' => 'failure',
 				'detail' => 'Rate Limited [MFR#048]',
-			));
+			), 429);
 		}
 
 		$RES = $NMW($REQ, $RES);

@@ -40,12 +40,9 @@ class Network extends \Test\OpenTHC_Test_Case
 
 	public function test_sign_request()
 	{
-		$client_public = 'test.openthc.dev';
-		$client_secret = 'a90a317e8ed94b2dbe6d9ee5b5f62540befd0691eb74466a445623b057ea3976';
-
 		$url = '/network/auth';
 		$arg = [
-			'client' => $client_public,
+			'client' => $_ENV['api-test-public-key'],
 			'timestamp' => date(\DateTime::RFC3339)
 		];
 		ksort($arg);
@@ -79,9 +76,9 @@ class Network extends \Test\OpenTHC_Test_Case
 				'openthc-signature' => $sig_hmac,
 			]
 		]);
-		$res = $this->assertValidResponse($res);
+		$res = $this->assertValidResponse($res, 200);
 
-		echo "url: $url\n";
+		// echo "url: $url\n";
 
 	}
 

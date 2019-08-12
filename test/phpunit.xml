@@ -2,6 +2,7 @@
 	PHP Unit Configuration File
 -->
 <phpunit
+
 	bootstrap="boot.php"
 	colors="true"
 	convertErrorsToExceptions="true"
@@ -21,6 +22,9 @@
 		<env name="debug-http" value="false" />
 
 		<env name="api-uri" value="https://p2p.openthc.dev/" />
+
+		<env name="api-test-public-key" value="test.openthc.dev" />
+		<env name="api-test-secret-key" value="MAKE_A_SECRET_HERE" />
 
 	</php>
 
