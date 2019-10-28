@@ -16,7 +16,7 @@
     "ext-PDO": "*",
     "ext-session": "*",
     "ext-sockets": "*",
-    "casbin/casbin": "0.2.1",
+    "casbin/casbin": "1.0.3",
     "slim/slim": "3.12.1",
     "guzzlehttp/guzzle": "6.3.3"
   },
