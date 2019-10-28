@@ -1,17 +1,15 @@
 <?php
 /**
-	Implements a very simiple rate limiter in Redis
-	Rate Limits to ($MAX / $TTL)
-
-	@see ./doc/RateLimit.md
-
-*/
+ * Implements a very simiple rate limiter in Redis
+ * Rate Limits to ($MAX / $TTL)
+ * @see ./doc/RateLimit.md
+ */
 
 namespace App\Middleware\Filter;
 
 class RateLimit
 {
-	private $_max = 3; // Events per TTL
+	private $_max = 4; // Events per TTL
 	private $_ttl = 1; // In Seconds
 
 	public function __invoke($REQ, $RES, $NMW)
@@ -21,6 +19,7 @@ class RateLimit
 
 		$kp1 = $_SERVER['REMOTE_ADDR'];
 
+		// Three ways to get second key
 		$kp2 = $REQ->getAttribute('AuthToken');
 		if (empty($kp2)) {
 			$kp2 = $REQ->getAttribute('API-Public-Key');
