@@ -1,20 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <!--
-	PHP Unit Configuration File
+	OpenTHC PHPUnit Configuration File
 -->
 <phpunit
-
+	backupGlobals="false"
+	backupStaticAttributes="false"
 	bootstrap="boot.php"
+	cacheResult="false"
 	colors="true"
 	convertErrorsToExceptions="true"
 	convertNoticesToExceptions="true"
 	convertWarningsToExceptions="true"
+	processIsolation="false"
+	stopOnError="true"
+	stopOnFailure="true"
+	stopOnRisky="true"
 	timeoutForSmallTests="1"
 	timeoutForMediumTests="10"
 	timeoutForLargeTests="60"
 	verbose="false"
-	stopOnError="false"
-	stopOnFailure="false"
-	stopOnRisky="true"
 	>
 
 	<php>
@@ -24,7 +28,7 @@
 		<env name="api-uri" value="https://p2p.openthc.dev/" />
 
 		<env name="api-test-public-key" value="test.openthc.dev" />
-		<env name="api-test-secret-key" value="MAKE_A_SECRET_HERE" />
+		<env name="api-test-secret-key" value="a90a317e8ed94b2dbe6d9ee5b5f62540befd0691eb74466a445623b057ea3976" />
 
 	</php>
 
@@ -36,7 +40,7 @@
 
 	<logging>
 		<!-- <log type="coverage-html" target="../webroot/test-output" /> -->
-		<log type="junit" target="../webroot/test-output/phpunit.xml" />
+		<log type="junit" target="../webroot/test-output/output.xml" />
 		<log type="testdox-html" target="../webroot/test-output/testdox.html" />
 	</logging>
 
