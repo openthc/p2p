@@ -28,7 +28,7 @@
 		<env name="api-uri" value="https://p2p.openthc.dev/" />
 
 		<env name="api-test-public-key" value="test.openthc.dev" />
-		<env name="api-test-secret-key" value="a90a317e8ed94b2dbe6d9ee5b5f62540befd0691eb74466a445623b057ea3976" />
+		<env name="api-test-secret-key" value="your_secret" />
 
 	</php>
 
