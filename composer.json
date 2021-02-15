@@ -16,14 +16,13 @@
 		"ext-PDO": "*",
 		"ext-session": "*",
 		"ext-sockets": "*",
-		"casbin/casbin": "1.0.3",
 		"slim/slim": "3.12.3",
 		"guzzlehttp/guzzle": "6.5.5"
 	},
 	"require-dev": {
 		"behat/behat": "3.7.0",
 		"phpmd/phpmd": "2.9.1",
-		"phpstan/phpstan": "0.12.54",
-		"phpunit/phpunit": "9.4.2"
+		"phpstan/phpstan": "0.12.76",
+		"phpunit/phpunit": "9.5.2"
 	}
 }
